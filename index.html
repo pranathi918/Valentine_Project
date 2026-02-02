@@ -29,7 +29,18 @@
 
     h1 {
       color: #ff4d6d;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
     }
 
     button {
@@ -38,7 +49,6 @@
       border-radius: 25px;
       border: none;
       cursor: pointer;
-      margin: 10px;
     }
 
     #yesBtn {
@@ -50,16 +60,11 @@
       background: white;
       color: #555;
       border: 1px solid #ddd;
-      position: absolute;
+      position: relative;
     }
 
     .hidden {
       display: none;
-    }
-
-    .success {
-      font-size: 22px;
-      color: #ff4d6d;
     }
 
     /* Floating hearts */
@@ -87,34 +92,45 @@
 
 <body>
 
-  <!-- Question Card -->
+  <!-- QUESTION CARD -->
   <div class="card" id="questionCard">
     <h1>Will you be my Valentine? 💘</h1>
-    <button id="yesBtn">Yes ❤️</button>
+    <div class="buttons">
+      <button id="yesBtn">Yes ❤️</button>
+      <button id="noBtn">No 🤍</button>
+    </div>
   </div>
 
-  <!-- Escaping No Button -->
-  <button id="noBtn">No 🤍</button>
+  <!-- YAY CARD -->
+  <div class="card hidden" id="yayCard">
+    <h1>YAYYY 🥹💖</h1>
+    <p>Happy Valentine’s Day 💕</p>
+  </div>
 
-  <!-- Success Card -->
-  <div class="card hidden" id="successCard">
-    <h1 class="success">So… 😌</h1>
-    <p style="font-size:20px; margin-top:10px;">
-      where is my kiss? 💋
-    </p>
+  <!-- ASK CARD -->
+  <div class="card hidden" id="askCard">
+    <p>I wanna ask you something… 😌</p>
+  </div>
+
+  <!-- KISS CARD -->
+  <div class="card hidden" id="kissCard">
+    <h1 style="color:#ff4d6d;">So… 😌</h1>
+    <p style="font-size:20px;">where’s my kiss? 💋</p>
   </div>
 
   <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
+
     const questionCard = document.getElementById("questionCard");
-    const successCard = document.getElementById("successCard");
+    const yayCard = document.getElementById("yayCard");
+    const askCard = document.getElementById("askCard");
+    const kissCard = document.getElementById("kissCard");
 
     function moveNoButton() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 100 - 50;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
     noBtn.addEventListener("mouseover", moveNoButton);
@@ -122,9 +138,18 @@
 
     yesBtn.addEventListener("click", () => {
       questionCard.classList.add("hidden");
-      noBtn.classList.add("hidden");
-      successCard.classList.remove("hidden");
+      yayCard.classList.remove("hidden");
       startHearts();
+
+      setTimeout(() => {
+        yayCard.classList.add("hidden");
+        askCard.classList.remove("hidden");
+      }, 1500);
+
+      setTimeout(() => {
+        askCard.classList.add("hidden");
+        kissCard.classList.remove("hidden");
+      }, 3000);
     });
 
     function startHearts() {
@@ -136,13 +161,9 @@
         heart.style.fontSize = (16 + Math.random() * 20) + "px";
         document.body.appendChild(heart);
 
-        setTimeout(() => {
-          heart.remove();
-        }, 4000);
+        setTimeout(() => heart.remove(), 4000);
       }, 300);
     }
-
-    moveNoButton();
   </script>
 
 </body>
