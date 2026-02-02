@@ -62,6 +62,7 @@
       color: #ff4d6d;
     }
 
+    /* Floating hearts */
     .heart {
       position: fixed;
       bottom: -20px;
@@ -70,7 +71,7 @@
       opacity: 0.8;
       pointer-events: none;
     }
-    
+
     @keyframes floatUp {
       0% {
         transform: translateY(0) scale(1);
@@ -83,76 +84,66 @@
     }
   </style>
 </head>
-  <div id="tryMessage" class="hidden" style="position:fixed; bottom:20px; width:100%; text-align:center; font-size:18px; color:#ff4d6d;">
-    Nice try 😏
-  </div>
+
 <body>
 
+  <!-- Question Card -->
   <div class="card" id="questionCard">
     <h1>Will you be my Valentine? 💘</h1>
     <button id="yesBtn">Yes ❤️</button>
   </div>
 
+  <!-- Escaping No Button -->
   <button id="noBtn">No 🤍</button>
 
+  <!-- Success Card -->
   <div class="card hidden" id="successCard">
-    <h1 class="success">YAYYY 🥹💖</h1>
-    <p>Best decision ever 😌<br/>Happy Valentine’s Day 💕</p>
+    <h1 class="success">So… 😌</h1>
+    <p style="font-size:20px; margin-top:10px;">
+      where is my kiss? 💋
+    </p>
   </div>
 
   <script>
-  const noBtn = document.getElementById("noBtn");
-  const yesBtn = document.getElementById("yesBtn");
-  const questionCard = document.getElementById("questionCard");
-  const successCard = document.getElementById("successCard");
-  const tryMessage = document.getElementById("tryMessage");
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const questionCard = document.getElementById("questionCard");
+    const successCard = document.getElementById("successCard");
 
-  let noCount = 0;
-
-  function moveNoButton() {
-    noCount++;
-
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-
-    if (noCount === 3) {
-      tryMessage.classList.remove("hidden");
-      setTimeout(() => {
-        tryMessage.classList.add("hidden");
-      }, 2000);
+    function moveNoButton() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
     }
-  }
 
-  noBtn.addEventListener("mouseover", moveNoButton);
-  noBtn.addEventListener("click", moveNoButton);
+    noBtn.addEventListener("mouseover", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
 
-  yesBtn.addEventListener("click", () => {
-    questionCard.classList.add("hidden");
-    noBtn.classList.add("hidden");
-    successCard.classList.remove("hidden");
-    startHearts();
-  });
+    yesBtn.addEventListener("click", () => {
+      questionCard.classList.add("hidden");
+      noBtn.classList.add("hidden");
+      successCard.classList.remove("hidden");
+      startHearts();
+    });
 
-  function startHearts() {
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerText = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (16 + Math.random() * 20) + "px";
-      document.body.appendChild(heart);
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (16 + Math.random() * 20) + "px";
+        document.body.appendChild(heart);
 
-      setTimeout(() => {
-        heart.remove();
-      }, 4000);
-    }, 300);
-  }
+        setTimeout(() => {
+          heart.remove();
+        }, 4000);
+      }, 300);
+    }
 
-  moveNoButton();
-</script>
-
+    moveNoButton();
+  </script>
 
 </body>
 </html>
