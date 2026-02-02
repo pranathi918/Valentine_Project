@@ -98,28 +98,34 @@
   <!-- QUESTION CARD -->
   <div class="card" id="questionCard">
     <h1>Will you be my Valentine? 💘</h1>
-
     <div class="buttons">
       <button id="yesBtn">Yes ❤️</button>
       <button id="noBtn">No 🤍</button>
     </div>
   </div>
 
-  <!-- YAY CARD -->
+  <!-- CARD 1 -->
   <div class="card hidden" id="yayCard">
     <h1>YAYYY 🥹💖</h1>
     <p>Happy Valentine’s Day 💕</p>
   </div>
 
-  <!-- ASK CARD -->
+  <!-- CARD 2 -->
   <div class="card hidden" id="askCard">
     <p>I wanna ask you something… 😌</p>
   </div>
 
-  <!-- KISS CARD -->
+  <!-- CARD 3 -->
   <div class="card hidden" id="kissCard">
     <h1 style="color:#ff4d6d;">So… 😌</h1>
     <p style="font-size:20px;">where’s my kiss? 💋</p>
+  </div>
+
+  <!-- CARD 4 (FINAL) -->
+  <div class="card hidden" id="finalCard">
+    <p style="font-size:20px;">
+      That’s the cue to kiss me 😌💋
+    </p>
   </div>
 
   <script>
@@ -130,11 +136,11 @@
     const yayCard = document.getElementById("yayCard");
     const askCard = document.getElementById("askCard");
     const kissCard = document.getElementById("kissCard");
+    const finalCard = document.getElementById("finalCard");
 
     let isEscaped = false;
 
     function moveNoButton() {
-      // On first hover, lock current position and switch to fixed
       if (!isEscaped) {
         const rect = noBtn.getBoundingClientRect();
         noBtn.style.position = "fixed";
@@ -164,12 +170,17 @@
       setTimeout(() => {
         yayCard.classList.add("hidden");
         askCard.classList.remove("hidden");
-      }, 1500);
+      }, 3000);
 
       setTimeout(() => {
         askCard.classList.add("hidden");
         kissCard.classList.remove("hidden");
-      }, 3000);
+      }, 6000);
+
+      setTimeout(() => {
+        kissCard.classList.add("hidden");
+        finalCard.classList.remove("hidden");
+      }, 9000);
     });
 
     function startHearts() {
